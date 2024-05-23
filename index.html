@@ -1,0 +1,73 @@
+<head>
+    <link href="select2.css" rel="stylesheet"/>
+    <script src="select2.js"></script>
+    <script>
+        $(document).ready(function() { $("#e1").select2(); });
+    </script>
+</head>
+<body>
+    <select id="e1" class="default">
+        <option value="AL">Alabama</option>
+      
+        <option value="WY">Wyoming</option>
+    </select>
+
+
+  <select id="e2" class="default">
+        <option value="TR">Turkey</option>
+    </select>
+
+
+<script>
+
+  var e1Select = $("#e1");
+   var e2Select = $("#e2");
+  $('.default').select2({
+    placeholder: "Select a State",
+    allowClear: true
+});
+
+  e1Select.on('select2:select', function(e){
+    let id = e.params.data.id;
+
+    alert('Selected #e1: '+id);
+
+    /*
+      Some things here
+    */
+  
+  });
+
+  
+  e2Select.on('select2:select', function(e){
+    let id = e.params.data.id;
+
+    alert('Selected #e2: '+id);
+
+    /*
+      Some things here
+    */
+  
+  });
+  
+</script>  
+  
+  <script>
+       $(document).ready(function () {
+            $('select').each(function () {
+                var $select = $(this);
+
+                if ($select.find('option').length === 1) {
+                    var externalData = {
+                        id: $select.find('option').first().val(),
+                        text: $select.find('option').first().text()
+                    };
+                        if ($select.data('select2')) {
+                            var customEvent = $.Event('select2:select', { params: { data: externalData } });
+                            $select.val($select.find('option').first().val()).trigger(customEvent).trigger('change');
+                        }
+                }
+            });
+        });
+  </script>
+</body>
